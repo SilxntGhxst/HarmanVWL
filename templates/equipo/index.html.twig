@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipo index{% endblock %}
+
+{% block body %}
+    <h1>Equipo index</h1>
+
+    <table id="tablaEquipos" class="min-w-full divide-y divide-gray-700">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Codigo_tag</th>
+                <th>Fecha_creacion</th>
+                <th>Torneos</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for equipo in equipos %}
+            <tr>
+                <td>{{ equipo.id }}</td>
+                <td>{{ equipo.nombre }}</td>
+                <td>{{ equipo.codigoTag }}</td>
+                <td>{{ equipo.fechaCreacion ? equipo.fechaCreacion|date('Y-m-d') : '' }}</td>
+                <td>
+                    {% for torneo in equipo.torneos %}
+                        {# Dibuja una pequeña pastilla visual por cada torneo #}
+                        <span class="inline-block bg-indigo-600 text-white text-xs px-2 py-1 rounded mb-1">
+                        {{ torneo.nombre }}
+                    </span>
+                    {% else %}
+                        {# El 'else' en Twig se ejecuta si la colección está vacía #}
+                        <span class="text-gray-500 italic">Sin inscribir</span>
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('app_equipo_show', {'id': equipo.id}) }}">show</a>
+                    <a href="{{ path('app_equipo_edit', {'id': equipo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_equipo_new') }}">Create new</a>
+
+    {% block javascripts %}
+        {# Renderizamos los scripts padre primero (jQuery, DataTables) #}
+        {{ parent() }}
+
+        <script>
+            // $(document).ready asegura que el HTML cargue por completo antes de ejecutar el script
+            $(document).ready(function() {
+
+                // Aquí le decimos a DataTables que transforme la tabla
+                $('#tablaEquipos').DataTable({
+                    // Configuración para poner la interfaz en español
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
+                    },
+                    columnDefs:[
+                        {
+                            "targets": [-1],
+                            "orderable": false
+                        }
+                    ]
+                });
+
+            });
+        </script>
+    {% endblock %}
+
+{% endblock %}

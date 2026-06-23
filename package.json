@@ -1,0 +1,27 @@
+{
+    "devDependencies": {
+        "@babel/core": "^7.17.0",
+        "@babel/preset-env": "^7.16.0",
+        "@symfony/webpack-encore": "^6.0.0",
+        "core-js": "^3.38.0",
+        "regenerator-runtime": "^0.13.9",
+        "webpack": "^5.72",
+        "webpack-cli": "^6.0.0",
+        "webpack-dev-server": "^5.2.5"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "dependencies": {
+        "@hotwired/turbo": "^8.0.23",
+        "@tailwindcss/postcss": "^4.3.1",
+        "postcss": "^8.5.15",
+        "postcss-loader": "^8.2.1",
+        "tailwindcss": "^4.3.1"
+    }
+}

@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jugador index{% endblock %}
+
+{% block body %}
+    <h1>Jugador index</h1>
+
+    <table id="tablaJuadores" class="min-w-full divide-y divide-gray-700">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nickname</th>
+                <th>Edad</th>
+                <th>Email</th>
+                <th>Rango</th>
+                <th>Equipo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for jugador in jugadors %}
+            <tr>
+                <td>{{ jugador.id }}</td>
+                <td>{{ jugador.nickname }}</td>
+                <td>{{ jugador.edad }}</td>
+                <td>{{ jugador.email }}</td>
+                <td>{{ jugador.rango ? jugador.rango.value : '' }}</td>
+                <td></td>
+                <td>
+                    {% if jugador.equipo %}
+                        <span class="text-blue-400 font-bold">{{ jugador.equipo.nombre }}</span>
+                    {% else %}
+                        <span class="text-gray-500 italic">Agente Libre</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('app_jugador_show', {'id': jugador.id}) }}">show</a>
+                    <a href="{{ path('app_jugador_edit', {'id': jugador.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_jugador_new') }}">Create new</a>
+
+    {% block javascripts %}
+        {# Renderizamos los scripts padre primero (jQuery, DataTables) #}
+        {{ parent() }}
+
+        <script>
+            // $(document).ready asegura que el HTML cargue por completo antes de ejecutar el script
+            $(document).ready(function() {
+
+                // Aquí le decimos a DataTables que transforme la tabla
+                $('#tablaJugadores').DataTable({
+                    // Configuración para poner la interfaz en español
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
+                    },
+                    columnDefs:[
+                        {
+                            "targets": [-1],
+                            "orderable": false
+                        }
+                    ]
+                });
+
+            });
+        </script>
+    {% endblock %}
+
+{% endblock %}

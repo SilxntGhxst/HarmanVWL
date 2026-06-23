@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Torneo index{% endblock %}
+
+{% block body %}
+    <h1>Torneo index</h1>
+
+    <table id="tablaTorneos" class="min-w-full divide-y divide-gray-700">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Juego</th>
+                <th>Bolsa_premios</th>
+                <th>Estado</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for torneo in torneos %}
+            <tr>
+                <td>{{ torneo.id }}</td>
+                <td>{{ torneo.nombre }}</td>
+                <td>{{ torneo.juego }}</td>
+                <td>{{ torneo.bolsaPremios }}</td>
+                <td>{{ torneo.estado ? torneo.estado.value : ''}}</td>
+                <td>
+                    <a href="{{ path('app_torneo_show', {'id': torneo.id}) }}">show</a>
+                    <a href="{{ path('app_torneo_edit', {'id': torneo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_torneo_new') }}">Create new</a>
+
+    {% block javascripts %}
+        {# Renderizamos los scripts padre primero (jQuery, DataTables) #}
+        {{ parent() }}
+
+        <script>
+            // $(document).ready asegura que el HTML cargue por completo antes de ejecutar el script
+            $(document).ready(function() {
+
+                // Aquí le decimos a DataTables que transforme la tabla
+                $('#tablaTorneos').DataTable({
+                    // Configuración para poner la interfaz en español
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
+                    },
+                    columnDefs:[
+                        {
+                            "targets": [-1],
+                            "orderable": false
+                        }
+                    ]
+                });
+
+            });
+        </script>
+    {% endblock %}
+
+
+{% endblock %}

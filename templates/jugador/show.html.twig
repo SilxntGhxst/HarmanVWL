@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jugador{% endblock %}
+
+{% block body %}
+    <h1>Jugador</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ jugador.id }}</td>
+            </tr>
+            <tr>
+                <th>Nickname</th>
+                <td>{{ jugador.nickname }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ jugador.email }}</td>
+            </tr>
+            <tr>
+                <th>Rango</th>
+                <td>{{ jugador.rango ? jugador.rango.value : '' }}</td>
+            </tr>
+            <tr>
+                <th>Equipo Actual</th>
+                <td>
+                    {% if jugador.equipo %}
+                        <div class="flex items-center gap-4">
+                            <span class="text-blue-400 font-bold">{{ jugador.equipo.nombre }}</span>
+
+                            {# Botón para desvincular #}
+                            <a href="{{ path('app_jugador_liberar', {'id': jugador.id}) }}" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-1 px-3 rounded transition-colors" onclick="return confirm('¿Estás seguro de que deseas liberar a este jugador?');">
+                                Liberar Jugador
+                            </a>
+                        </div>
+                    {% else %}
+                        {# Contenedor flex para el Agente Libre #}
+                        <div class="flex items-center gap-4">
+                            <span class="text-gray-500 italic">Agente Libre</span>
+
+                            {# Redirige a la lista general de equipos #}
+                            <a href="{{ path('app_equipo_index') }}" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-1 px-3 rounded transition-colors">
+                                Ver Equipos Disponibles
+                            </a>
+                        </div>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_jugador_index') }}">back to list</a>
+
+    <a href="{{ path('app_jugador_edit', {'id': jugador.id}) }}">edit</a>
+
+    {{ include('jugador/_delete_form.html.twig') }}
+{% endblock %}

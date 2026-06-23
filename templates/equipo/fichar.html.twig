@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fichar Jugador{% endblock %}
+
+{% block body %}
+    <div class="max-w-2xl mx-auto mt-10 p-6 bg-gray-800 rounded-lg shadow-xl">
+        <h1 class="text-2xl font-bold text-green-500 mb-6">
+            Fichar Agente Libre para: {{ equipo.nombre }}
+        </h1>
+
+        {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+
+        <div>
+            {{ form_label(form.jugador, 'Seleccione un Jugador', {'label_attr': {'class': 'block text-sm font-medium text-gray-300'}}) }}
+            {{ form_widget(form.jugador, {'attr': {'class': 'mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-green-500 focus:ring-green-500'}}) }}
+        </div>
+
+        <div class="flex gap-4 mt-6">
+            <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                Confirmar Fichaje
+            </button>
+            <a href="{{ path('app_equipo_index') }}" class="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">
+                Cancelar
+            </a>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

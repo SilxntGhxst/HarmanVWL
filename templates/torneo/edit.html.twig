@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Torneo{% endblock %}
+
+{% block body %}
+    <h1>Edit Torneo</h1>
+
+    {{ include('torneo/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_torneo_index') }}">back to list</a>
+
+    {{ include('torneo/_delete_form.html.twig') }}
+{% endblock %}

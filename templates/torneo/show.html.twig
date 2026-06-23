@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Torneo{% endblock %}
+
+{% block body %}
+    <h1>Torneo</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ torneo.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ torneo.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Juego</th>
+                <td>{{ torneo.juego }}</td>
+            </tr>
+            <tr>
+                <th>Bolsa_premios</th>
+                <td>{{ torneo.bolsaPremios }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ torneo.estado ? torneo.estado.value : ''}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_torneo_index') }}">back to list</a>
+
+    <a href="{{ path('app_torneo_edit', {'id': torneo.id}) }}">edit</a>
+
+    <a href="{{ path('app_torneo_inscribir', {'id': torneo.id}) }}" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition-colors">
+        Inscribir Equipo
+    </a>
+
+    {{ include('torneo/_delete_form.html.twig') }}
+{% endblock %}
