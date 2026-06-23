@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4caee2b8-4258-439f-8faf-20ddd5e78cf1" name="Changes" comment="" />
+    <list default="true" id="4caee2b8-4258-439f-8faf-20ddd5e78cf1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/equipo/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/equipo/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/jugador/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/jugador/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/torneo/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torneo/index.html.twig" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -199,7 +204,7 @@
       <workItem from="1781801039474" duration="7876000" />
       <workItem from="1781878873868" duration="13056000" />
       <workItem from="1782138550729" duration="17697000" />
-      <workItem from="1782224748985" duration="3049000" />
+      <workItem from="1782224748985" duration="3699000" />
     </task>
     <servers />
   </component>

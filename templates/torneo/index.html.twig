@@ -39,28 +39,31 @@
 
     <a href="{{ path('app_torneo_new') }}">Create new</a>
 
-    {% block javascripts %}
-        {# Renderizamos los scripts padre primero (jQuery, DataTables) #}
-        {{ parent() }}
-
+    {% block javascripts_locales %}
         <script>
-            // $(document).ready asegura que el HTML cargue por completo antes de ejecutar el script
-            $(document).ready(function() {
+            // Escuchamos a Turbo en lugar de a document.ready
+            document.addEventListener("turbo:load", function() {
 
-                // Aquí le decimos a DataTables que transforme la tabla
-                $('#tablaTorneos').DataTable({
-                    // Configuración para poner la interfaz en español
-                    language: {
-                        url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
-                    },
-                    columnDefs:[
-                        {
-                            "targets": [-1],
-                            "orderable": false
-                        }
-                    ]
-                });
+                // 1. Verificamos si la tabla existe en esta página
+                let tabla = $('#tablaTorneos'); // Cambia esto por tablaEquipos o tablaTorneos según el archivo
 
+                if (tabla.length) {
+                    // 2. Verificamos que no se haya inicializado ya (Turbo guarda cosas en caché)
+                    if (!$.fn.DataTable.isDataTable(tabla)) {
+
+                        tabla.DataTable({
+                            language: {
+                                url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
+                            },
+                            columnDefs: [
+                                {
+                                    "targets": [-1],
+                                    "orderable": false
+                                }
+                            ]
+                        });
+                    }
+                }
             });
         </script>
     {% endblock %}
