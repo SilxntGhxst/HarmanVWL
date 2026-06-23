@@ -1,59 +1,79 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Jugador{% endblock %}
+{% block title %}Jugador: {{ jugador.nickname }}{% endblock %}
 
 {% block body %}
-    <h1>Jugador</h1>
+    <div class="mb-6">
+        <a href="{{ path('app_jugador_index') }}" class="text-gray-400 hover:text-green-400 transition-colors text-sm flex items-center gap-2">
+            <span>&larr;</span> Volver a la lista
+        </a>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ jugador.id }}</td>
-            </tr>
-            <tr>
-                <th>Nickname</th>
-                <td>{{ jugador.nickname }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ jugador.email }}</td>
-            </tr>
-            <tr>
-                <th>Rango</th>
-                <td>{{ jugador.rango ? jugador.rango.value : '' }}</td>
-            </tr>
-            <tr>
-                <th>Equipo Actual</th>
-                <td>
-                    {% if jugador.equipo %}
-                        <div class="flex items-center gap-4">
-                            <span class="text-blue-400 font-bold">{{ jugador.equipo.nombre }}</span>
+    <div class="card max-w-3xl mx-auto">
+        <div class="card-header">
+            <h1 class="text-2xl font-bold text-white">Perfil del Jugador</h1>
+            <div class="flex gap-2">
+                <a href="{{ path('app_jugador_edit', {'id': jugador.id}) }}" class="btn-secundario py-1.5 px-4 text-sm">Editar</a>
+                {{ include('jugador/_delete_form.html.twig') }}
+            </div>
+        </div>
 
-                            {# Botón para desvincular #}
-                            <a href="{{ path('app_jugador_liberar', {'id': jugador.id}) }}" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-1 px-3 rounded transition-colors" onclick="return confirm('¿Estás seguro de que deseas liberar a este jugador?');">
-                                Liberar Jugador
-                            </a>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-sm font-medium text-gray-400">ID</h3>
+                    <p class="mt-1 text-lg text-white font-mono">{{ jugador.id }}</p>
+                </div>
+                <div>
+                    <h3 class="text-sm font-medium text-gray-400">Nickname</h3>
+                    <p class="mt-1 text-lg text-white font-semibold">{{ jugador.nickname }}</p>
+                </div>
+                <div>
+                    <h3 class="text-sm font-medium text-gray-400">Email</h3>
+                    <p class="mt-1 text-lg text-gray-300">{{ jugador.email }}</p>
+                </div>
+                <div class="flex gap-6">
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-400">Edad</h3>
+                        <p class="mt-1 text-lg text-white">{{ jugador.edad }}</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-400">Rango</h3>
+                        <p class="mt-1 text-lg">
+                            {% if jugador.rango %}
+                                <span class="badge">{{ jugador.rango.value }}</span>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900/50 rounded-lg p-5 border border-gray-700">
+                <h3 class="text-md font-bold text-green-400 mb-4 border-b border-gray-700 pb-2">Estado Actual</h3>
+                {% if jugador.equipo %}
+                    <div class="flex flex-col items-start gap-4">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                            <span class="text-white font-medium">Fichado por: <span class="text-green-400">{{ jugador.equipo.nombre }}</span></span>
                         </div>
-                    {% else %}
-                        {# Contenedor flex para el Agente Libre #}
-                        <div class="flex items-center gap-4">
-                            <span class="text-gray-500 italic">Agente Libre</span>
-
-                            {# Redirige a la lista general de equipos #}
-                            <a href="{{ path('app_equipo_index') }}" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-1 px-3 rounded transition-colors">
-                                Ver Equipos Disponibles
-                            </a>
+                        <a href="{{ path('app_jugador_liberar', {'id': jugador.id}) }}" class="btn-peligro w-full mt-4" onclick="return confirm('¿Estás seguro de que deseas liberar a este jugador?');">
+                            Liberar Jugador
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="flex flex-col items-start gap-4">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-gray-500"></span>
+                            <span class="text-gray-400 italic">Agente Libre</span>
                         </div>
-                    {% endif %}
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_jugador_index') }}">back to list</a>
-
-    <a href="{{ path('app_jugador_edit', {'id': jugador.id}) }}">edit</a>
-
-    {{ include('jugador/_delete_form.html.twig') }}
+                        <a href="{{ path('app_equipo_index') }}" class="btn-primario w-full mt-4 text-sm">
+                            Ver Equipos para Fichar
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -1,46 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="es" class="dark">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Harman VWL{% endblock %}</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gestión de Esports | HarmanVWL{% endblock %}</title>
 
-    {# 1. Inyección de Tailwind CSS por CDN para los estilos #}
+    {# Google Fonts: Inter #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    {# 1. Tailwind CSS por CDN #}
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
-    {# 2. Inyección de Hotwire Turbo por CDN para la navegación fluida (SPA) #}
+    {# 2. Nuestros Componentes Personalizados #}
+    {% include 'partials/_tailwind_styles.html.twig' %}
+
+    {# 3. CSS de DataTables #}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.tailwindcss.css">
+
+    {# 4. Hotwire Turbo #}
     <script type="module">
         import * as Turbo from 'https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.4/+esm';
     </script>
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.tailwindcss.css">
-
-    {% block stylesheets %}
-    {% endblock %}
-
-    {% block javascripts %}
-        {# Mantenemos el importmap apagado para evitar cualquier conflicto con archivos locales #}
-        {# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
-    {% endblock %}
 </head>
-<body class="bg-gray-900 text-green-500 min-h-screen">
-<nav>
-    <ul>
-        {# Enlace usando el nombre de la ruta (route) configurada en tu controlador #}
-        <li><a href="{{ path('app_home') }}">Inicio</a></li>
-        <li><a href="{{ path('app_equipo_index') }}">Equipos</a></li>
-        <li><a href="{{ path('app_jugador_index') }}">Jugadores</a></li>
-        <li><a href="{{ path('app_torneo_index') }}">Torneos</a></li>
-    </ul>
-</nav>
-{% block body %}{% endblock %}
+<body class="bg-gray-900 text-gray-300 min-h-screen flex flex-col font-sans selection:bg-green-500/30 selection:text-green-200">
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-<script src="https://cdn.datatables.net/2.0.8/js/dataTables.tailwindcss.js"></script>
+    {# Navbar Moderna #}
+    <nav class="bg-gray-900/80 backdrop-blur-md border-b border-gray-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <div class="w-8 h-8 rounded bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg shadow-green-500/20">
+                        <span class="text-white font-bold text-xl">H</span>
+                    </div>
+                    <a href="{{ path('app_home') }}" class="text-xl font-bold text-white tracking-tight">Harman<span class="text-green-500">VWL</span></a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-1">
+                        <a href="{{ path('app_home') }}" class="text-gray-300 hover:text-green-400 hover:bg-gray-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">Inicio</a>
+                        <a href="{{ path('app_equipo_index') }}" class="text-gray-300 hover:text-green-400 hover:bg-gray-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">Equipos</a>
+                        <a href="{{ path('app_jugador_index') }}" class="text-gray-300 hover:text-green-400 hover:bg-gray-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">Jugadores</a>
+                        <a href="{{ path('app_torneo_index') }}" class="text-gray-300 hover:text-green-400 hover:bg-gray-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">Torneos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-{# Aquí abrimos un bloque de Twig para que las páginas hijas puedan inyectar su propio JS #}
-{% block javascripts_locales %}{% endblock %}
+    {# Contenido Principal #}
+    <main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {% block body %}{% endblock %}
+    </main>
+
+    {# Footer #}
+    <footer class="bg-gray-900 border-t border-gray-800 py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+            &copy; {{ "now"|date("Y") }} Harman VWL Gestión de Esports. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    {# Scripts Globales #}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.tailwindcss.js"></script>
+
+    {# Bloque para JS de páginas hijas #}
+    {% block javascripts_locales %}{% endblock %}
 
 </body>
 </html>

@@ -1,43 +1,69 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Torneo{% endblock %}
+{% block title %}Torneo: {{ torneo.nombre }}{% endblock %}
 
 {% block body %}
-    <h1>Torneo</h1>
+    <div class="mb-6">
+        <a href="{{ path('app_torneo_index') }}" class="text-gray-400 hover:text-green-400 transition-colors text-sm flex items-center gap-2">
+            <span>&larr;</span> Volver a la lista
+        </a>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ torneo.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombre</th>
-                <td>{{ torneo.nombre }}</td>
-            </tr>
-            <tr>
-                <th>Juego</th>
-                <td>{{ torneo.juego }}</td>
-            </tr>
-            <tr>
-                <th>Bolsa_premios</th>
-                <td>{{ torneo.bolsaPremios }}</td>
-            </tr>
-            <tr>
-                <th>Estado</th>
-                <td>{{ torneo.estado ? torneo.estado.value : ''}}</td>
-            </tr>
+    <div class="card max-w-3xl mx-auto">
+        <div class="card-header">
+            <h1 class="text-2xl font-bold text-white">Detalles del Torneo</h1>
+            <div class="flex gap-2">
+                <a href="{{ path('app_torneo_edit', {'id': torneo.id}) }}" class="btn-secundario py-1.5 px-4 text-sm">Editar</a>
+                {{ include('torneo/_delete_form.html.twig') }}
+            </div>
+        </div>
 
-        </tbody>
-    </table>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-sm font-medium text-gray-400">ID</h3>
+                    <p class="mt-1 text-lg text-white font-mono">{{ torneo.id }}</p>
+                </div>
+                <div>
+                    <h3 class="text-sm font-medium text-gray-400">Nombre</h3>
+                    <p class="mt-1 text-lg text-white font-semibold">{{ torneo.nombre }}</p>
+                </div>
+                <div>
+                    <h3 class="text-sm font-medium text-gray-400">Juego</h3>
+                    <p class="mt-1 text-lg text-gray-300">{{ torneo.juego }}</p>
+                </div>
+                <div class="flex gap-6">
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-400">Bolsa Premios</h3>
+                        <p class="mt-1 text-lg text-green-400 font-mono">${{ torneo.bolsaPremios|number_format(2, '.', ',') }}</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-400">Estado</h3>
+                        <p class="mt-1 text-lg">
+                            {% if torneo.estado %}
+                                <span class="badge">{{ torneo.estado.value }}</span>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-    <a href="{{ path('app_torneo_index') }}">back to list</a>
-
-    <a href="{{ path('app_torneo_edit', {'id': torneo.id}) }}">edit</a>
-
-    <a href="{{ path('app_torneo_inscribir', {'id': torneo.id}) }}" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition-colors">
-        Inscribir Equipo
-    </a>
-
-    {{ include('torneo/_delete_form.html.twig') }}
+            <div class="bg-gray-900/50 rounded-lg p-5 border border-gray-700 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-md font-bold text-green-400 mb-4 border-b border-gray-700 pb-2">Inscripciones</h3>
+                    <p class="text-gray-400 text-sm mb-4">
+                        Gestiona los equipos que participan en este torneo.
+                    </p>
+                </div>
+                
+                <div class="mt-6 pt-4 border-t border-gray-700">
+                    <a href="{{ path('app_torneo_inscribir', {'id': torneo.id}) }}" class="btn-primario w-full text-sm">
+                        Inscribir Equipo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

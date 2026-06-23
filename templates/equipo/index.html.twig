@@ -1,66 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Equipo index{% endblock %}
+{% block title %}Equipos{% endblock %}
 
 {% block body %}
-    <h1>Equipo index</h1>
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-white tracking-tight">Equipos</h1>
+        <a href="{{ path('app_equipo_new') }}" class="btn-primario">
+            + Nuevo Equipo
+        </a>
+    </div>
 
-    <table id="tablaEquipos" class="min-w-full divide-y divide-gray-700">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Codigo_tag</th>
-                <th>Fecha_creacion</th>
-                <th>Torneos</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for equipo in equipos %}
-            <tr>
-                <td>{{ equipo.id }}</td>
-                <td>{{ equipo.nombre }}</td>
-                <td>{{ equipo.codigoTag }}</td>
-                <td>{{ equipo.fechaCreacion ? equipo.fechaCreacion|date('Y-m-d') : '' }}</td>
-                <td>
-                    {% for torneo in equipo.torneos %}
-                        {# Dibuja una pequeña pastilla visual por cada torneo #}
-                        <span class="inline-block bg-indigo-600 text-white text-xs px-2 py-1 rounded mb-1">
-                        {{ torneo.nombre }}
-                    </span>
-                    {% else %}
-                        {# El 'else' en Twig se ejecuta si la colección está vacía #}
-                        <span class="text-gray-500 italic">Sin inscribir</span>
-                    {% endfor %}
-                </td>
-                <td>
-                    <a href="{{ path('app_equipo_show', {'id': equipo.id}) }}">show</a>
-                    <a href="{{ path('app_equipo_edit', {'id': equipo.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_equipo_new') }}">Create new</a>
+    <div class="card">
+        <table id="tablaEquipos" class="min-w-full divide-y divide-gray-700">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Código Tag</th>
+                    <th>Fecha Creación</th>
+                    <th>Torneos</th>
+                    <th class="text-right">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for equipo in equipos %}
+                <tr class="group">
+                    <td class="text-gray-400 font-mono">{{ equipo.id }}</td>
+                    <td class="font-semibold text-white">{{ equipo.nombre }}</td>
+                    <td><span class="text-sm bg-gray-700 text-gray-300 px-2 py-1 rounded font-mono">{{ equipo.codigoTag }}</span></td>
+                    <td class="text-gray-400">{{ equipo.fechaCreacion ? equipo.fechaCreacion|date('Y-m-d') : '' }}</td>
+                    <td>
+                        <div class="flex flex-wrap gap-1">
+                        {% for torneo in equipo.torneos %}
+                            <span class="badge">{{ torneo.nombre }}</span>
+                        {% else %}
+                            <span class="text-gray-500 text-sm italic">Sin inscribir</span>
+                        {% endfor %}
+                        </div>
+                    </td>
+                    <td class="text-right space-x-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                        <a href="{{ path('app_equipo_show', {'id': equipo.id}) }}" class="btn-accion">Ver</a>
+                        <a href="{{ path('app_equipo_edit', {'id': equipo.id}) }}" class="btn-accion">Editar</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="text-center text-gray-500 py-8">No se encontraron equipos</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     {% block javascripts_locales %}
         <script>
-            // Escuchamos a Turbo en lugar de a document.ready
             document.addEventListener("turbo:load", function() {
-
-                // 1. Verificamos si la tabla existe en esta página
-                let tabla = $('#tablaEquipos'); // Cambia esto por tablaEquipos o tablaTorneos según el archivo
+                let tabla = $('#tablaEquipos');
 
                 if (tabla.length) {
-                    // 2. Verificamos que no se haya inicializado ya (Turbo guarda cosas en caché)
                     if (!$.fn.DataTable.isDataTable(tabla)) {
-
                         tabla.DataTable({
                             language: {
                                 url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',

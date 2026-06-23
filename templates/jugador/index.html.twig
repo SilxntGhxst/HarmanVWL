@@ -1,64 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Jugador index{% endblock %}
+{% block title %}Jugadores{% endblock %}
 
 {% block body %}
-    <h1>Jugador index</h1>
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-white tracking-tight">Jugadores</h1>
+        <a href="{{ path('app_jugador_new') }}" class="btn-primario">
+            + Nuevo Jugador
+        </a>
+    </div>
 
-    <table id="tablaJugadores" class="min-w-full divide-y divide-gray-700">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nickname</th>
-                <th>Edad</th>
-                <th>Email</th>
-                <th>Rango</th>
-                <th>Equipo</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for jugador in jugadors %}
-            <tr>
-                <td>{{ jugador.id }}</td>
-                <td>{{ jugador.nickname }}</td>
-                <td>{{ jugador.edad }}</td>
-                <td>{{ jugador.email }}</td>
-                <td>{{ jugador.rango ? jugador.rango.value : '' }}</td>
-                <td>
-                    {% if jugador.equipo %}
-                        <span class="text-blue-400 font-bold">{{ jugador.equipo.nombre }}</span>
-                    {% else %}
-                        <span class="text-gray-500 italic">Agente Libre</span>
-                    {% endif %}
-                </td>
-                <td>
-                    <a href="{{ path('app_jugador_show', {'id': jugador.id}) }}">show</a>
-                    <a href="{{ path('app_jugador_edit', {'id': jugador.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_jugador_new') }}">Create new</a>
+    <div class="card">
+        <table id="tablaJugadores" class="min-w-full divide-y divide-gray-700">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nickname</th>
+                    <th>Edad</th>
+                    <th>Email</th>
+                    <th>Rango</th>
+                    <th>Equipo</th>
+                    <th class="text-right">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for jugador in jugadors %}
+                <tr class="group">
+                    <td class="text-gray-400 font-mono">{{ jugador.id }}</td>
+                    <td class="font-semibold text-white">{{ jugador.nickname }}</td>
+                    <td class="text-gray-400">{{ jugador.edad }}</td>
+                    <td class="text-gray-400">{{ jugador.email }}</td>
+                    <td>
+                        {% if jugador.rango %}
+                            <span class="badge bg-green-900/40 border-green-500/30 text-green-300">{{ jugador.rango.value }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if jugador.equipo %}
+                            <span class="text-green-400 font-medium">{{ jugador.equipo.nombre }}</span>
+                        {% else %}
+                            <span class="text-gray-500 text-sm italic">Agente Libre</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-right space-x-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                        <a href="{{ path('app_jugador_show', {'id': jugador.id}) }}" class="btn-accion">Ver</a>
+                        <a href="{{ path('app_jugador_edit', {'id': jugador.id}) }}" class="btn-accion">Editar</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7" class="text-center text-gray-500 py-8">No se encontraron jugadores</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     {% block javascripts_locales %}
         <script>
-            // Escuchamos a Turbo en lugar de a document.ready
             document.addEventListener("turbo:load", function() {
-
-                // 1. Verificamos si la tabla existe en esta página
-                let tabla = $('#tablaJugadores'); // Cambia esto por tablaEquipos o tablaTorneos según el archivo
+                let tabla = $('#tablaJugadores');
 
                 if (tabla.length) {
-                    // 2. Verificamos que no se haya inicializado ya (Turbo guarda cosas en caché)
                     if (!$.fn.DataTable.isDataTable(tabla)) {
-
                         tabla.DataTable({
                             language: {
                                 url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',

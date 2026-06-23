@@ -1,4 +1,6 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="mt-6 flex justify-end">
+        <button class="btn-primario">{{ button_label|default('Guardar') }}</button>
+    </div>
 {{ form_end(form) }}

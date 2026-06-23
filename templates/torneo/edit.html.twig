@@ -1,13 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Torneo{% endblock %}
+{% block title %}Editar Torneo{% endblock %}
 
 {% block body %}
-    <h1>Edit Torneo</h1>
+    <div class="mb-6">
+        <a href="{{ path('app_torneo_index') }}" class="text-gray-400 hover:text-green-400 transition-colors text-sm flex items-center gap-2">
+            <span>&larr;</span> Volver a la lista
+        </a>
+    </div>
 
-    {{ include('torneo/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="card max-w-2xl mx-auto">
+        <div class="card-header">
+            <h1 class="text-2xl font-bold text-white">Editar Torneo</h1>
+            {{ include('torneo/_delete_form.html.twig') }}
+        </div>
 
-    <a href="{{ path('app_torneo_index') }}">back to list</a>
-
-    {{ include('torneo/_delete_form.html.twig') }}
+        <div class="mt-4">
+            {{ include('torneo/_form.html.twig', {'button_label': 'Actualizar'}) }}
+        </div>
+    </div>
 {% endblock %}

@@ -1,60 +1,69 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Equipo{% endblock %}
+{% block title %}Equipo: {{ equipo.nombre }}{% endblock %}
 
 {% block body %}
-    <h1>Equipo</h1>
+    <div class="mb-6">
+        <a href="{{ path('app_equipo_index') }}" class="text-gray-400 hover:text-green-400 transition-colors text-sm flex items-center gap-2">
+            <span>&larr;</span> Volver a la lista
+        </a>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ equipo.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombre</th>
-                <td>{{ equipo.nombre }}</td>
-            </tr>
-            <tr>
-                <th>Codigo_tag</th>
-                <td>{{ equipo.codigoTag }}</td>
-            </tr>
-            <tr>
-                <th>Fecha_creacion</th>
-                <td>{{ equipo.fechaCreacion ? equipo.fechaCreacion|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Torneos Inscritos</th>
-                <td>
-                    {% if equipo.torneos is not empty %}
-                        <ul class="list-disc list-inside text-gray-300">
-                            {% for torneo in equipo.torneos %}
-                                <li>{{ torneo.nombre }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% else %}
-                        {# Contenedor flex para alinear el texto y el botón #}
-                        <div class="flex items-center gap-4">
-                            <span class="text-gray-500 italic">Este equipo no participa en ningún torneo aún.</span>
+    <div class="card max-w-3xl mx-auto">
+        <div class="card-header">
+            <h1 class="text-2xl font-bold text-white">Detalles del Equipo</h1>
+            <div class="flex gap-2">
+                <a href="{{ path('app_equipo_edit', {'id': equipo.id}) }}" class="btn-secundario py-1.5 px-4 text-sm">Editar</a>
+                {{ include('equipo/_delete_form.html.twig') }}
+            </div>
+        </div>
 
-                            {# Redirige a la lista general de torneos #}
-                            <a href="{{ path('app_torneo_index') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-1 px-3 rounded transition-colors">
-                                Explorar Torneos
-                            </a>
-                        </div>
-                    {% endif %}
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-sm font-medium text-gray-400">ID</h3>
+                    <p class="mt-1 text-lg text-white font-mono">{{ equipo.id }}</p>
+                </div>
+                <div>
+                    <h3 class="text-sm font-medium text-gray-400">Nombre</h3>
+                    <p class="mt-1 text-lg text-white font-semibold">{{ equipo.nombre }}</p>
+                </div>
+                <div>
+                    <h3 class="text-sm font-medium text-gray-400">Código Tag</h3>
+                    <p class="mt-1 text-lg"><span class="bg-gray-700 text-gray-200 px-2 py-1 rounded font-mono text-sm">{{ equipo.codigoTag }}</span></p>
+                </div>
+                <div>
+                    <h3 class="text-sm font-medium text-gray-400">Fecha de Creación</h3>
+                    <p class="mt-1 text-lg text-white">{{ equipo.fechaCreacion ? equipo.fechaCreacion|date('d/m/Y') : '-' }}</p>
+                </div>
+            </div>
 
-    <a href="{{ path('app_equipo_index') }}">back to list</a>
-
-    <a href="{{ path('app_equipo_edit', {'id': equipo.id}) }}">edit</a>
-
-    <a href="{{ path('app_equipo_fichar', {'id': equipo.id}) }}" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition-colors">
-        Fichar Jugador
-    </a>
-
-    {{ include('equipo/_delete_form.html.twig') }}
+            <div class="bg-gray-900/50 rounded-lg p-5 border border-gray-700">
+                <h3 class="text-md font-bold text-green-400 mb-4 border-b border-gray-700 pb-2">Torneos Inscritos</h3>
+                {% if equipo.torneos is not empty %}
+                    <ul class="space-y-2">
+                        {% for torneo in equipo.torneos %}
+                            <li class="flex items-center gap-2 text-gray-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                {{ torneo.nombre }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div class="flex flex-col items-start gap-4">
+                        <span class="text-gray-500 text-sm italic">Este equipo no participa en ningún torneo aún.</span>
+                        <a href="{{ path('app_torneo_index') }}" class="text-green-500 hover:text-green-400 text-sm font-medium hover:underline">
+                            Explorar Torneos &rarr;
+                        </a>
+                    </div>
+                {% endif %}
+                
+                <div class="mt-6 pt-4 border-t border-gray-700">
+                    <a href="{{ path('app_equipo_fichar', {'id': equipo.id}) }}" class="btn-primario w-full text-sm">
+                        Fichar Jugador
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

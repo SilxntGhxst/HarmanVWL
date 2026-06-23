@@ -1,56 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Torneo index{% endblock %}
+{% block title %}Torneos{% endblock %}
 
 {% block body %}
-    <h1>Torneo index</h1>
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-white tracking-tight">Torneos</h1>
+        <a href="{{ path('app_torneo_new') }}" class="btn-primario">
+            + Nuevo Torneo
+        </a>
+    </div>
 
-    <table id="tablaTorneos" class="min-w-full divide-y divide-gray-700">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Juego</th>
-                <th>Bolsa_premios</th>
-                <th>Estado</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for torneo in torneos %}
-            <tr>
-                <td>{{ torneo.id }}</td>
-                <td>{{ torneo.nombre }}</td>
-                <td>{{ torneo.juego }}</td>
-                <td>{{ torneo.bolsaPremios }}</td>
-                <td>{{ torneo.estado ? torneo.estado.value : ''}}</td>
-                <td>
-                    <a href="{{ path('app_torneo_show', {'id': torneo.id}) }}">show</a>
-                    <a href="{{ path('app_torneo_edit', {'id': torneo.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_torneo_new') }}">Create new</a>
+    <div class="card">
+        <table id="tablaTorneos" class="min-w-full divide-y divide-gray-700">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Juego</th>
+                    <th>Bolsa Premios</th>
+                    <th>Estado</th>
+                    <th class="text-right">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for torneo in torneos %}
+                <tr class="group">
+                    <td class="text-gray-400 font-mono">{{ torneo.id }}</td>
+                    <td class="font-semibold text-white">{{ torneo.nombre }}</td>
+                    <td class="text-gray-400">{{ torneo.juego }}</td>
+                    <td class="text-green-400 font-mono">${{ torneo.bolsaPremios|number_format(2, '.', ',') }}</td>
+                    <td>
+                        {% if torneo.estado %}
+                            <span class="badge bg-green-900/40 border-green-500/30 text-green-300">{{ torneo.estado.value }}</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-right space-x-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                        <a href="{{ path('app_torneo_show', {'id': torneo.id}) }}" class="btn-accion">Ver</a>
+                        <a href="{{ path('app_torneo_edit', {'id': torneo.id}) }}" class="btn-accion">Editar</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="text-center text-gray-500 py-8">No se encontraron torneos</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     {% block javascripts_locales %}
         <script>
-            // Escuchamos a Turbo en lugar de a document.ready
             document.addEventListener("turbo:load", function() {
-
-                // 1. Verificamos si la tabla existe en esta página
-                let tabla = $('#tablaTorneos'); // Cambia esto por tablaEquipos o tablaTorneos según el archivo
+                let tabla = $('#tablaTorneos');
 
                 if (tabla.length) {
-                    // 2. Verificamos que no se haya inicializado ya (Turbo guarda cosas en caché)
                     if (!$.fn.DataTable.isDataTable(tabla)) {
-
                         tabla.DataTable({
                             language: {
                                 url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
@@ -67,6 +71,5 @@
             });
         </script>
     {% endblock %}
-
 
 {% endblock %}

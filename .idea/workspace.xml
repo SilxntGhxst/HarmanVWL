@@ -6,9 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="4caee2b8-4258-439f-8faf-20ddd5e78cf1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/equipo/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/equipo/_delete_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/equipo/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/equipo/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/equipo/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/equipo/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/equipo/fichar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/equipo/fichar.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/equipo/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/equipo/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/equipo/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/equipo/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/equipo/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/equipo/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/jugador/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/jugador/_delete_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/jugador/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/jugador/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/jugador/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/jugador/edit.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/jugador/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/jugador/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/jugador/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/jugador/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/jugador/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/jugador/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/torneo/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torneo/_delete_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/torneo/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torneo/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/torneo/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torneo/edit.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/torneo/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torneo/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/torneo/inscribir.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torneo/inscribir.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/torneo/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torneo/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/torneo/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torneo/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +223,7 @@
       <workItem from="1781801039474" duration="7876000" />
       <workItem from="1781878873868" duration="13056000" />
       <workItem from="1782138550729" duration="17697000" />
-      <workItem from="1782224748985" duration="3699000" />
+      <workItem from="1782224748985" duration="7260000" />
     </task>
     <servers />
   </component>

@@ -3,12 +3,45 @@
 {% block title %}Bienvenidos a HarmanVWL!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="flex flex-col items-center justify-center min-h-[70vh] text-center px-4">
+    <div class="inline-flex items-center justify-center p-2 bg-green-500/10 rounded-full mb-8 ring-1 ring-green-500/20">
+        <span class="text-green-400 text-sm font-medium px-4">Plataforma de Torneos de Videojuegos</span>
+    </div>
 
-<div class="example-wrapper">
-    <h1>Bienvenidos a Harman VWL</h1>
+    <h1 class="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-6 tracking-tight">
+        Bienvenidos a <br class="md:hidden" />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600">Harman VWL</span>
+    </h1>
+
+    <p class="text-lg md:text-xl text-gray-400 max-w-2xl mb-12 leading-relaxed">
+        Administra tus equipos, inscribe jugadores y organiza torneos con nuestra plataforma de esports de última generación.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4">
+        <a href="{{ path('app_equipo_index') }}" class="btn-primario px-8 py-4 text-lg">
+            Ver Equipos
+        </a>
+        <a href="{{ path('app_torneo_index') }}" class="btn-secundario px-8 py-4 text-lg">
+            Explorar Torneos
+        </a>
+    </div>
+
+    <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
+        <a href="{{ path('app_equipo_index') }}" class="block card bg-gray-800/40 border-gray-700/50 hover:bg-gray-800/60 hover:border-green-500/50 transition-all group cursor-pointer">
+            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4 text-green-400 text-2xl group-hover:scale-110 transition-transform">🛡️</div>
+            <h3 class="text-xl font-bold text-white mb-2 text-left group-hover:text-green-400 transition-colors">Equipos</h3>
+            <p class="text-gray-400 text-left text-sm">Gestiona la información de los equipos participantes, sus códigos y su historial.</p>
+        </a>
+        <a href="{{ path('app_jugador_index') }}" class="block card bg-gray-800/40 border-gray-700/50 hover:bg-gray-800/60 hover:border-green-500/50 transition-all group cursor-pointer">
+            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4 text-green-400 text-2xl group-hover:scale-110 transition-transform">🎮</div>
+            <h3 class="text-xl font-bold text-white mb-2 text-left group-hover:text-green-400 transition-colors">Jugadores</h3>
+            <p class="text-gray-400 text-left text-sm">Registra jugadores y mantén un control detallado de sus fichajes.</p>
+        </a>
+        <a href="{{ path('app_torneo_index') }}" class="block card bg-gray-800/40 border-gray-700/50 hover:bg-gray-800/60 hover:border-green-500/50 transition-all group cursor-pointer">
+            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4 text-green-400 text-2xl group-hover:scale-110 transition-transform">🏆</div>
+            <h3 class="text-xl font-bold text-white mb-2 text-left group-hover:text-green-400 transition-colors">Torneos</h3>
+            <p class="text-gray-400 text-left text-sm">Organiza competiciones, inscribe equipos y lleva el control del campeonato.</p>
+        </a>
+    </div>
 </div>
 {% endblock %}

@@ -1,11 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Equipo{% endblock %}
+{% block title %}Nuevo Equipo{% endblock %}
 
 {% block body %}
-    <h1>Create new Equipo</h1>
+    <div class="mb-6">
+        <a href="{{ path('app_equipo_index') }}" class="text-gray-400 hover:text-green-400 transition-colors text-sm flex items-center gap-2">
+            <span>&larr;</span> Volver a la lista
+        </a>
+    </div>
 
-    {{ include('equipo/_form.html.twig') }}
+    <div class="card max-w-2xl mx-auto">
+        <div class="card-header">
+            <h1 class="text-2xl font-bold text-white">Crear Nuevo Equipo</h1>
+        </div>
 
-    <a href="{{ path('app_equipo_index') }}">back to list</a>
+        <div class="mt-4">
+            {{ include('equipo/_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

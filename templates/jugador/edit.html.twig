@@ -1,13 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Jugador{% endblock %}
+{% block title %}Editar Jugador{% endblock %}
 
 {% block body %}
-    <h1>Edit Jugador</h1>
+    <div class="mb-6">
+        <a href="{{ path('app_jugador_index') }}" class="text-gray-400 hover:text-green-400 transition-colors text-sm flex items-center gap-2">
+            <span>&larr;</span> Volver a la lista
+        </a>
+    </div>
 
-    {{ include('jugador/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="card max-w-2xl mx-auto">
+        <div class="card-header">
+            <h1 class="text-2xl font-bold text-white">Editar Jugador</h1>
+            {{ include('jugador/_delete_form.html.twig') }}
+        </div>
 
-    <a href="{{ path('app_jugador_index') }}">back to list</a>
-
-    {{ include('jugador/_delete_form.html.twig') }}
+        <div class="mt-4">
+            {{ include('jugador/_form.html.twig', {'button_label': 'Actualizar'}) }}
+        </div>
+    </div>
 {% endblock %}
