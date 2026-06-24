@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Form\FichajeType;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 #[Route('/equipo')]
 final class EquipoController extends AbstractController
@@ -81,7 +83,7 @@ final class EquipoController extends AbstractController
     }
 
     #[Route('/equipo/{id}/fichar', name: 'app_equipo_fichar', methods: ['GET', 'POST'])]
-    public function ficharJugador(Request $request, Equipo $equipo, EntityManagerInterface $entityManager): Response
+    public function ficharJugador(Request $request, Equipo $equipo, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         // 1. Creamos el formulario de fichaje
         $form = $this->createForm(FichajeType::class);
@@ -96,7 +98,7 @@ final class EquipoController extends AbstractController
             $jugadorSeleccionado ->setEquipo($equipo);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Fichaje completado exitosamente.');
+            $this->addFlash('success', $translator->trans('flash.fichaje.success'));
             return $this->redirectToRoute('app_equipo_show', ['id' => $equipo->getId()]);
         }
 
@@ -104,5 +106,17 @@ final class EquipoController extends AbstractController
             'equipo' => $equipo,
             'form' => $form,
         ]);
+    }
+
+    #[Route('/{id}/despedir/{jugador_id}', name: 'app_equipo_despedir', methods: ['POST'])]
+    public function despedirJugador(Request $request, Equipo $equipo, #[MapEntity(id: 'jugador_id')] \App\Entity\Jugador $jugador, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+    {
+        if ($this->isCsrfTokenValid('despedir'.$jugador->getId(), $request->getPayload()->getString('_token'))) {
+            $jugador->setEquipo(null);
+            $entityManager->flush();
+            $this->addFlash('success', $translator->trans('flash.equipo.player_fired'));
+        }
+
+        return $this->redirectToRoute('app_equipo_show', ['id' => $equipo->getId()]);
     }
 }

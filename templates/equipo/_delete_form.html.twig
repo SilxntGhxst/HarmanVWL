@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('app_equipo_delete', {'id': equipo.id}) }}" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este equipo?');" class="inline-block">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ equipo.id) }}">
-    <button class="btn-peligro py-1.5 px-4 text-sm">Eliminar</button>
+    <button class="btn-peligro py-1.5 px-4 text-sm">{{ 'general.delete'|trans }}</button>
 </form>

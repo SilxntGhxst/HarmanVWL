@@ -1,75 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Torneos{% endblock %}
+{% block title %}{{ 'torneo.index.title'|trans }}{% endblock %}
 
 {% block body %}
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-white tracking-tight">Torneos</h1>
+        <h1 class="page-title">{{ 'torneo.index.title'|trans }}</h1>
         <a href="{{ path('app_torneo_new') }}" class="btn-primario">
-            + Nuevo Torneo
+            {{ 'torneo.index.new_button'|trans }}
         </a>
     </div>
 
     <div class="card">
-        <table id="tablaTorneos" class="min-w-full divide-y divide-gray-700">
+        <table class="datatable min-w-full divide-y divide-gray-700">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Juego</th>
-                    <th>Bolsa Premios</th>
-                    <th>Estado</th>
-                    <th class="text-right">Acciones</th>
+                    <th>{{ 'general.fields.id'|trans }}</th>
+                    <th>{{ 'torneo.fields.nombre'|trans }}</th>
+                    <th>{{ 'torneo.fields.juego'|trans }}</th>
+                    <th>{{ 'torneo.fields.bolsa_premios'|trans }}</th>
+                    <th>{{ 'torneo.fields.estado'|trans }}</th>
+                    <th class="text-right">{{ 'general.actions'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
             {% for torneo in torneos %}
                 <tr class="group">
-                    <td class="text-gray-400 font-mono">{{ torneo.id }}</td>
+                    <td>
+                        <a href="{{ path('app_torneo_show', {'id': torneo.id}) }}" class="inline-block bg-gray-700 hover:bg-green-600 text-gray-200 hover:text-white text-xs px-2 py-1 rounded font-mono transition-colors shadow-sm cursor-pointer">
+                            #{{ torneo.id|length < 3 ? '%03d'|format(torneo.id) : torneo.id }}
+                        </a>
+                    </td>
                     <td class="font-semibold text-white">{{ torneo.nombre }}</td>
                     <td class="text-gray-400">{{ torneo.juego }}</td>
                     <td class="text-green-400 font-mono">${{ torneo.bolsaPremios|number_format(2, '.', ',') }}</td>
                     <td>
                         {% if torneo.estado %}
-                            <span class="badge bg-green-900/40 border-green-500/30 text-green-300">{{ torneo.estado.value }}</span>
+                            <span class="badge bg-green-900/40 border-green-500/30 text-green-300">{{ torneo.estado.value|trans }}</span>
                         {% endif %}
                     </td>
                     <td class="text-right space-x-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
-                        <a href="{{ path('app_torneo_show', {'id': torneo.id}) }}" class="btn-accion">Ver</a>
-                        <a href="{{ path('app_torneo_edit', {'id': torneo.id}) }}" class="btn-accion">Editar</a>
+                        <div class="flex justify-end gap-2">
+                            <a href="{{ path('app_torneo_show', {'id': torneo.id}) }}" class="btn-accion">{{ 'general.view'|trans }}</a>
+                            <a href="{{ path('app_torneo_edit', {'id': torneo.id}) }}" class="btn-accion">{{ 'general.edit'|trans }}</a>
+                            <form method="post" action="{{ path('app_torneo_delete', {'id': torneo.id}) }}" onsubmit="return confirm('{{ 'general.delete_confirm'|trans }}');" class="inline-block">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ torneo.id) }}">
+                                <button class="btn-peligro">{{ 'general.delete'|trans }}</button>
+                            </form>
+                        </div>
                     </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="6" class="text-center text-gray-500 py-8">No se encontraron torneos</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
-
-    {% block javascripts_locales %}
-        <script>
-            document.addEventListener("turbo:load", function() {
-                let tabla = $('#tablaTorneos');
-
-                if (tabla.length) {
-                    if (!$.fn.DataTable.isDataTable(tabla)) {
-                        tabla.DataTable({
-                            language: {
-                                url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
-                            },
-                            columnDefs: [
-                                {
-                                    "targets": [-1],
-                                    "orderable": false
-                                }
-                            ]
-                        });
-                    }
-                }
-            });
-        </script>
-    {% endblock %}
-
 {% endblock %}

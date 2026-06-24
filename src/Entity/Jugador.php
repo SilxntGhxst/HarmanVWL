@@ -6,9 +6,12 @@ use App\Enum\RangoJugador;
 use App\Repository\JugadorRepository;
 use Doctrine\ORM\Mapping as ORM;
 use http\Message;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: JugadorRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'assert.jugador.email.unique')]
+#[UniqueEntity(fields: ['nickname'], message: 'assert.jugador.nickname.unique')]
 class Jugador
 {
     #[ORM\Id]
@@ -16,27 +19,32 @@ class Jugador
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\Assert\NotBlank(message: 'El jugador debe tener un nombre.')]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank(message: 'assert.jugador.nickname.not_blank')]
     #[Assert\Length(
         min: 3,
         max: 50,
-        minMessage: 'El nickname del jugador debe tener al menos {{ limit }} caracteres',
-        maxMessage: 'El nickname del jugador no puede tener más de {{ limit }} caracteres'
+        minMessage: 'assert.jugador.nickname.min',
+        maxMessage: 'assert.jugador.nickname.max'
     )]
     private ?string $nickname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank(message: 'assert.jugador.email.not_blank')]
+    #[Assert\Email(message: 'assert.jugador.email.invalid')]
     private ?string $email = null;
 
     #[ORM\Column(type: 'string', length: 255, enumType: \App\Enum\RangoJugador::class)]
+    #[Assert\NotNull(message: 'assert.jugador.rango.not_null')]
     private ?\App\Enum\RangoJugador $rango = null;
 
     #[ORM\ManyToOne(inversedBy: 'jugadores')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private ?Equipo $equipo = null;
 
     #[ORM\Column(options: ['default' => 18])]
-    #[Assert\Range(min: 1, max: 99)]
+    #[Assert\NotNull(message: 'assert.jugador.edad.not_null')]
+    #[Assert\Range(min: 1, max: 99, notInRangeMessage: 'assert.jugador.edad.range')]
     private ?int $edad = null;
 
     public function getId(): ?int

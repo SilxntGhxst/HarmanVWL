@@ -1,0 +1,157 @@
+nav:
+    home: Home
+    teams: Teams
+    players: Players
+    tournaments: Tournaments
+    
+footer:
+    rights: Harman VWL Esports Management. All rights reserved.
+
+home:
+    title: Welcome to HarmanVWL!
+    subtitle: Video Game Tournament Platform
+    welcome: Welcome to
+    description: Manage your teams, register players, and organize tournaments with our next-generation esports platform.
+    buttons:
+        teams: View Teams
+        tournaments: Explore Tournaments
+    cards:
+        teams:
+            title: Teams
+            desc: Manage the information of participating teams, their codes, and their history.
+        players:
+            title: Players
+            desc: Register players and keep a detailed track of their signings.
+        tournaments:
+            title: Tournaments
+            desc: Organize competitions, register teams, and keep track of the championship.
+
+general:
+    back_to_list: Back to list
+    view: View
+    edit: Edit
+    save: Save
+    update: Update
+    delete: Delete
+    delete_confirm: Are you sure you want to delete this item?
+    actions: Actions
+    not_inscribed: Not inscribed
+    fields:
+        id: Id
+        nombre: Name
+
+datatables:
+    url: https://cdn.datatables.net/plug-ins/2.0.8/i18n/en-GB.json
+
+equipo:
+    index:
+        title: Teams
+        new_button: + New Team
+        no_tournaments: Not inscribed
+    new:
+        title: Create New Team
+    edit:
+        title: Edit Team
+    show:
+        title: Team
+        players: Players
+        fire: Fire
+        no_players: This team has no players yet.
+    fichar:
+        title: Sign Player
+        heading: Sign Player for
+    fields:
+        id: Id
+        nombre: Name
+        codigo_tag: Tag Code
+        fecha_creacion: Creation Date
+        torneos: Tournaments
+
+jugador:
+    index:
+        title: Players
+        new_button: + New Player
+    new:
+        title: Create New Player
+    edit:
+        title: Edit Player
+    show:
+        title: Player
+        profile: Player Profile
+        current_status: Current Status
+        signed_by: Signed by
+        release: Release Player
+        release_confirm: Are you sure you want to release this player?
+        view_teams: View Teams to Sign
+    fields:
+        nickname: Nickname
+        edad: Age
+        email: Email
+        rango: Rank
+        equipo: Team
+    free_agent: Free Agent
+
+torneo:
+    index:
+        title: Tournaments
+        new_button: + New Tournament
+    new:
+        title: Create New Tournament
+    edit:
+        title: Edit Tournament
+    show:
+        title: Tournament
+        inscribe: Inscribe Team
+        unregister: Unregister
+        details: Tournament Details
+    fields:
+        nombre: Name
+        juego: Game
+        bolsa_premios: Prize Pool
+        estado: Status
+        equipos: Inscribed Teams
+
+form:
+    equipo:
+        nombre: Name
+        codigo_tag: Tag Code
+        fecha_creacion: Creation Date
+    jugador:
+        nickname: Nickname
+        edad: Age
+        email: Email
+        rango: Rank
+        rango_placeholder: Select your rank...
+    torneo:
+        nombre: Tournament Name
+        juego: Game
+        bolsa_premios: Prize Pool ($)
+        estado: Tournament Status
+        estado_placeholder: Select a status...
+    fichaje:
+        jugador: Player to sign
+        jugador_placeholder: Select a Free Agent...
+    inscripcion:
+        equipo: Team to inscribe
+        equipo_placeholder: Select a team to inscribe...
+
+flash:
+    jugador:
+        liberated: The player has been released and is now a Free Agent.
+    fichaje:
+        success: Signing completed successfully.
+    torneo:
+        inscribed: Team successfully inscribed in the tournament.
+        uninscribed: Team successfully unregistered from the tournament.
+        not_in_inscription: The tournament is not in the registration phase.
+    equipo:
+        player_fired: Player successfully fired from the team.
+
+Bronce: Bronze
+Plata: Silver
+Oro: Gold
+Diamante: Diamond
+Inscripciones: Registrations
+'En curso': In Progress
+Finalizado: Finished
+Cancelado: Cancelled

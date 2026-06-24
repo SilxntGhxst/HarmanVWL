@@ -16,13 +16,14 @@ class JugadorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nickname')
-            ->add('edad')
-            ->add('email')
+            ->add('nickname', null, ['label' => 'form.jugador.nickname'])
+            ->add('edad', null, ['label' => 'form.jugador.edad'])
+            ->add('email', null, ['label' => 'form.jugador.email'])
             ->add('rango', EnumType::class,
                 [
                 'class' => RangoJugador::class,
-                'placeholder' => 'Selecciona tu rango...',
+                'placeholder' => 'form.jugador.rango_placeholder',
+                'label' => 'form.jugador.rango',
                 'choice_label'=> function($choice){
                 return $choice->value;
                 }]

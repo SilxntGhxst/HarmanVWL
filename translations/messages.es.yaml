@@ -1,0 +1,157 @@
+nav:
+    home: Inicio
+    teams: Equipos
+    players: Jugadores
+    tournaments: Torneos
+    
+footer:
+    rights: Harman VWL Gestión de Esports. Todos los derechos reservados.
+
+home:
+    title: ¡Bienvenidos a HarmanVWL!
+    subtitle: Plataforma de Torneos de Videojuegos
+    welcome: Bienvenidos a
+    description: Administra tus equipos, inscribe jugadores y organiza torneos con nuestra plataforma de esports de última generación.
+    buttons:
+        teams: Ver Equipos
+        tournaments: Explorar Torneos
+    cards:
+        teams:
+            title: Equipos
+            desc: Gestiona la información de los equipos participantes, sus códigos y su historial.
+        players:
+            title: Jugadores
+            desc: Registra jugadores y mantén un control detallado de sus fichajes.
+        tournaments:
+            title: Torneos
+            desc: Organiza competiciones, inscribe equipos y lleva el control del campeonato.
+
+general:
+    back_to_list: Volver a la lista
+    view: Ver
+    edit: Editar
+    save: Guardar
+    update: Actualizar
+    delete: Eliminar
+    delete_confirm: ¿Estás seguro de que quieres eliminar este elemento?
+    actions: Acciones
+    not_inscribed: Sin inscribir
+    fields:
+        id: Id
+        nombre: Nombre
+
+datatables:
+    url: https://cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json
+
+equipo:
+    index:
+        title: Equipos
+        new_button: + Nuevo Equipo
+        no_tournaments: Sin inscribir
+    new:
+        title: Crear Nuevo Equipo
+    edit:
+        title: Editar Equipo
+    show:
+        title: Equipo
+        players: Jugadores
+        fire: Despedir
+        no_players: Este equipo no tiene jugadores aún.
+    fichar:
+        title: Fichar Jugador
+        heading: Fichar Jugador para
+    fields:
+        id: Id
+        nombre: Nombre
+        codigo_tag: Código Tag
+        fecha_creacion: Fecha Creación
+        torneos: Torneos
+
+jugador:
+    index:
+        title: Jugadores
+        new_button: + Nuevo Jugador
+    new:
+        title: Crear Nuevo Jugador
+    edit:
+        title: Editar Jugador
+    show:
+        title: Jugador
+        profile: Perfil del Jugador
+        current_status: Estado Actual
+        signed_by: Fichado por
+        release: Liberar Jugador
+        release_confirm: ¿Estás seguro de que deseas liberar a este jugador?
+        view_teams: Ver Equipos para Fichar
+    fields:
+        nickname: Nickname
+        edad: Edad
+        email: Email
+        rango: Rango
+        equipo: Equipo
+    free_agent: Agente Libre
+
+torneo:
+    index:
+        title: Torneos
+        new_button: + Nuevo Torneo
+    new:
+        title: Crear Nuevo Torneo
+    edit:
+        title: Editar Torneo
+    show:
+        title: Torneo
+        inscribe: Inscribir Equipo
+        unregister: Desinscribir
+        details: Detalles del Torneo
+    fields:
+        nombre: Nombre
+        juego: Juego
+        bolsa_premios: Bolsa Premios
+        estado: Estado
+        equipos: Equipos Inscritos
+
+form:
+    equipo:
+        nombre: Nombre
+        codigo_tag: Código Tag
+        fecha_creacion: Fecha de Creación
+    jugador:
+        nickname: Nickname
+        edad: Edad
+        email: Correo Electrónico
+        rango: Rango
+        rango_placeholder: Selecciona tu rango...
+    torneo:
+        nombre: Nombre del Torneo
+        juego: Juego
+        bolsa_premios: Bolsa de Premios ($)
+        estado: Estado del Torneo
+        estado_placeholder: Selecciona un estado...
+    fichaje:
+        jugador: Jugador a fichar
+        jugador_placeholder: Selecciona un Agente Libre...
+    inscripcion:
+        equipo: Equipo a inscribir
+        equipo_placeholder: Selecciona un equipo para inscribir...
+
+flash:
+    jugador:
+        liberated: El jugador ha sido liberado y ahora es Agente Libre.
+    fichaje:
+        success: Fichaje completado exitosamente.
+    torneo:
+        inscribed: Equipo inscrito correctamente al torneo.
+        uninscribed: Equipo desinscrito correctamente del torneo.
+        not_in_inscription: El torneo no está en fase de inscripciones.
+    equipo:
+        player_fired: Jugador despedido del equipo exitosamente.
+
+Bronce: Bronce
+Plata: Plata
+Oro: Oro
+Diamante: Diamante
+Inscripciones: Inscripciones
+'En curso': En curso
+Finalizado: Finalizado
+Cancelado: Cancelado

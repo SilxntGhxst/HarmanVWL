@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/jugador')]
 final class JugadorController extends AbstractController
@@ -80,7 +81,7 @@ final class JugadorController extends AbstractController
     }
 
     #[Route('/{id}/liberar', name: 'app_jugador_liberar', methods: ['GET'])]
-    public function liberarJugador(Jugador $jugador, EntityManagerInterface $entityManager): Response
+    public function liberarJugador(Jugador $jugador, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         // TODO: Tu misión de aprendizaje.
         // 1. Usa el método setter del jugador para asignarle un valor nulo (null) en el equipo.
@@ -88,7 +89,7 @@ final class JugadorController extends AbstractController
         // 2. Ejecuta el flush() del $entityManager para guardar el cambio.
         $entityManager -> flush();
 
-        $this->addFlash('success', 'El jugador ha sido liberado y ahora es Agente Libre.');
+        $this->addFlash('success', $translator->trans('flash.jugador.liberated'));
 
         // Redirigimos de vuelta a la vista del jugador
         return $this->redirectToRoute('app_jugador_show', ['id' => $jugador->getId()]);

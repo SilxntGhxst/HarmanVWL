@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="{{ app.request.locale }}" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,31 +10,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    {# 1. Tailwind CSS por CDN #}
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    {# Webpack Encore Assets #}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 
-    {# 2. Nuestros Componentes Personalizados #}
-    {% include 'partials/_tailwind_styles.html.twig' %}
-
-    {# 3. CSS de DataTables #}
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.tailwindcss.css">
-
-    {# 4. Hotwire Turbo #}
-    <script type="module">
-        import * as Turbo from 'https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.4/+esm';
-    </script>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
 </head>
 <body class="bg-gray-900 text-gray-300 min-h-screen flex flex-col font-sans selection:bg-green-500/30 selection:text-green-200">
 
@@ -48,12 +31,17 @@
                     </div>
                     <a href="{{ path('app_home') }}" class="text-xl font-bold text-white tracking-tight">Harman<span class="text-green-500">VWL</span></a>
                 </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-1">
-                        <a href="{{ path('app_home') }}" class="text-gray-300 hover:text-green-400 hover:bg-gray-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">Inicio</a>
-                        <a href="{{ path('app_equipo_index') }}" class="text-gray-300 hover:text-green-400 hover:bg-gray-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">Equipos</a>
-                        <a href="{{ path('app_jugador_index') }}" class="text-gray-300 hover:text-green-400 hover:bg-gray-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">Jugadores</a>
-                        <a href="{{ path('app_torneo_index') }}" class="text-gray-300 hover:text-green-400 hover:bg-gray-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">Torneos</a>
+                <div class="hidden md:flex flex-1 justify-between items-center ml-10">
+                    <div class="flex items-baseline space-x-1">
+                        <a href="{{ path('app_home') }}" class="text-gray-300 hover:text-green-400 hover:bg-gray-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ 'nav.home'|trans }}</a>
+                        <a href="{{ path('app_equipo_index') }}" class="text-gray-300 hover:text-green-400 hover:bg-gray-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ 'nav.teams'|trans }}</a>
+                        <a href="{{ path('app_jugador_index') }}" class="text-gray-300 hover:text-green-400 hover:bg-gray-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ 'nav.players'|trans }}</a>
+                        <a href="{{ path('app_torneo_index') }}" class="text-gray-300 hover:text-green-400 hover:bg-gray-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ 'nav.tournaments'|trans }}</a>
+                    </div>
+                    
+                    <div class="flex items-center ml-4 space-x-2 border-l border-gray-700 pl-4">
+                        <a href="{{ path('app_switch_locale', {'_locale': 'es'}) }}" class="px-2 py-1 text-xs font-semibold rounded {{ app.request.locale == 'es' ? 'bg-green-600 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-gray-200' }}">ES</a>
+                        <a href="{{ path('app_switch_locale', {'_locale': 'en'}) }}" class="px-2 py-1 text-xs font-semibold rounded {{ app.request.locale == 'en' ? 'bg-green-600 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-gray-200' }}">EN</a>
                     </div>
                 </div>
             </div>
@@ -68,17 +56,9 @@
     {# Footer #}
     <footer class="bg-gray-900 border-t border-gray-800 py-6 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
-            &copy; {{ "now"|date("Y") }} Harman VWL Gestión de Esports. Todos los derechos reservados.
+            &copy; {{ "now"|date("Y") }} {{ 'footer.rights'|trans }}
         </div>
     </footer>
-
-    {# Scripts Globales #}
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.tailwindcss.js"></script>
-
-    {# Bloque para JS de páginas hijas #}
-    {% block javascripts_locales %}{% endblock %}
 
 </body>
 </html>

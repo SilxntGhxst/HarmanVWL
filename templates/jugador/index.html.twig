@@ -1,26 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Jugadores{% endblock %}
+{% block title %}{{ 'jugador.index.title'|trans }}{% endblock %}
 
 {% block body %}
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-white tracking-tight">Jugadores</h1>
+        <h1 class="page-title">{{ 'jugador.index.title'|trans }}</h1>
         <a href="{{ path('app_jugador_new') }}" class="btn-primario">
-            + Nuevo Jugador
+            {{ 'jugador.index.new_button'|trans }}
         </a>
     </div>
 
     <div class="card">
-        <table id="tablaJugadores" class="min-w-full divide-y divide-gray-700">
+        <table class="datatable min-w-full divide-y divide-gray-700">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Nickname</th>
-                    <th>Edad</th>
-                    <th>Email</th>
-                    <th>Rango</th>
-                    <th>Equipo</th>
-                    <th class="text-right">Acciones</th>
+                    <th>{{ 'general.fields.id'|trans }}</th>
+                    <th>{{ 'jugador.fields.nickname'|trans }}</th>
+                    <th>{{ 'jugador.fields.edad'|trans }}</th>
+                    <th>{{ 'jugador.fields.email'|trans }}</th>
+                    <th>{{ 'jugador.fields.rango'|trans }}</th>
+                    <th>{{ 'jugador.fields.equipo'|trans }}</th>
+                    <th class="text-right">{{ 'general.actions'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,52 +32,29 @@
                     <td class="text-gray-400">{{ jugador.email }}</td>
                     <td>
                         {% if jugador.rango %}
-                            <span class="badge bg-green-900/40 border-green-500/30 text-green-300">{{ jugador.rango.value }}</span>
+                            <span class="badge bg-green-900/40 border-green-500/30 text-green-300">{{ jugador.rango.value|trans }}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if jugador.equipo %}
                             <span class="text-green-400 font-medium">{{ jugador.equipo.nombre }}</span>
                         {% else %}
-                            <span class="text-gray-500 text-sm italic">Agente Libre</span>
+                            <span class="text-gray-500 text-sm italic">{{ 'jugador.free_agent'|trans }}</span>
                         {% endif %}
                     </td>
                     <td class="text-right space-x-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
-                        <a href="{{ path('app_jugador_show', {'id': jugador.id}) }}" class="btn-accion">Ver</a>
-                        <a href="{{ path('app_jugador_edit', {'id': jugador.id}) }}" class="btn-accion">Editar</a>
+                        <div class="flex justify-end gap-2">
+                            <a href="{{ path('app_jugador_show', {'id': jugador.id}) }}" class="btn-accion">{{ 'general.view'|trans }}</a>
+                            <a href="{{ path('app_jugador_edit', {'id': jugador.id}) }}" class="btn-accion">{{ 'general.edit'|trans }}</a>
+                            <form method="post" action="{{ path('app_jugador_delete', {'id': jugador.id}) }}" onsubmit="return confirm('{{ 'general.delete_confirm'|trans }}');" class="inline-block">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ jugador.id) }}">
+                                <button class="btn-peligro">{{ 'general.delete'|trans }}</button>
+                            </form>
+                        </div>
                     </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="7" class="text-center text-gray-500 py-8">No se encontraron jugadores</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
-
-    {% block javascripts_locales %}
-        <script>
-            document.addEventListener("turbo:load", function() {
-                let tabla = $('#tablaJugadores');
-
-                if (tabla.length) {
-                    if (!$.fn.DataTable.isDataTable(tabla)) {
-                        tabla.DataTable({
-                            language: {
-                                url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
-                            },
-                            columnDefs: [
-                                {
-                                    "targets": [-1],
-                                    "orderable": false
-                                }
-                            ]
-                        });
-                    }
-                }
-            });
-        </script>
-    {% endblock %}
-
 {% endblock %}

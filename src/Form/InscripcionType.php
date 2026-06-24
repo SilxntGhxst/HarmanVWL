@@ -19,7 +19,8 @@ class InscripcionType extends AbstractType
         $builder
             ->add('equipo', EntityType::class, [
                 'class' => Equipo::class,
-                'placeholder' => 'Selecciona un equipo para inscribir...',
+                'placeholder' => 'form.inscripcion.equipo_placeholder',
+                'label' => 'form.inscripcion.equipo',
                 'choice_label' => 'nombre',
 
                 // 2. El QueryBuilder inteligente con la lógica de conjuntos

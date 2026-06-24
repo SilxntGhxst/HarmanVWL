@@ -4,44 +4,44 @@
 
 {% block body %}
     <div class="mb-6">
-        <a href="{{ path('app_torneo_index') }}" class="text-gray-400 hover:text-green-400 transition-colors text-sm flex items-center gap-2">
-            <span>&larr;</span> Volver a la lista
+        <a href="{{ path('app_torneo_index') }}" class="link-back">
+            <span>&larr;</span> {{ 'general.back_to_list'|trans }}
         </a>
     </div>
 
     <div class="card max-w-3xl mx-auto">
         <div class="card-header">
-            <h1 class="text-2xl font-bold text-white">Detalles del Torneo</h1>
+            <h1 class="card-title">{{ 'torneo.show.details'|trans }}</h1>
             <div class="flex gap-2">
-                <a href="{{ path('app_torneo_edit', {'id': torneo.id}) }}" class="btn-secundario py-1.5 px-4 text-sm">Editar</a>
+                <a href="{{ path('app_torneo_edit', {'id': torneo.id}) }}" class="btn-secundario py-1.5 px-4 text-sm">{{ 'general.edit'|trans }}</a>
                 {{ include('torneo/_delete_form.html.twig') }}
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+        <div class="grid-2col">
             <div class="space-y-4">
                 <div>
-                    <h3 class="text-sm font-medium text-gray-400">ID</h3>
-                    <p class="mt-1 text-lg text-white font-mono">{{ torneo.id }}</p>
+                    <h3 class="label-title">ID</h3>
+                    <p class="label-value-mono">{{ torneo.id }}</p>
                 </div>
                 <div>
-                    <h3 class="text-sm font-medium text-gray-400">Nombre</h3>
-                    <p class="mt-1 text-lg text-white font-semibold">{{ torneo.nombre }}</p>
+                    <h3 class="label-title">{{ 'torneo.fields.nombre'|trans }}</h3>
+                    <p class="label-value">{{ torneo.nombre }}</p>
                 </div>
                 <div>
-                    <h3 class="text-sm font-medium text-gray-400">Juego</h3>
-                    <p class="mt-1 text-lg text-gray-300">{{ torneo.juego }}</p>
+                    <h3 class="label-title">{{ 'torneo.fields.juego'|trans }}</h3>
+                    <p class="label-value">{{ torneo.juego }}</p>
                 </div>
                 <div class="flex gap-6">
                     <div>
-                        <h3 class="text-sm font-medium text-gray-400">Bolsa Premios</h3>
-                        <p class="mt-1 text-lg text-green-400 font-mono">${{ torneo.bolsaPremios|number_format(2, '.', ',') }}</p>
+                        <h3 class="label-title">{{ 'torneo.fields.bolsa_premios'|trans }}</h3>
+                        <p class="label-value-mono">${{ torneo.bolsaPremios|number_format(2, '.', ',') }}</p>
                     </div>
                     <div>
-                        <h3 class="text-sm font-medium text-gray-400">Estado</h3>
+                        <h3 class="label-title">{{ 'torneo.fields.estado'|trans }}</h3>
                         <p class="mt-1 text-lg">
                             {% if torneo.estado %}
-                                <span class="badge">{{ torneo.estado.value }}</span>
+                                <span class="badge">{{ torneo.estado.value|trans }}</span>
                             {% else %}
                                 -
                             {% endif %}
@@ -56,12 +56,32 @@
                     <p class="text-gray-400 text-sm mb-4">
                         Gestiona los equipos que participan en este torneo.
                     </p>
+
+                    {% if torneo.equipos is not empty %}
+                        <ul class="space-y-3 mb-4">
+                            {% for equipo in torneo.equipos %}
+                                <li class="list-item-card">
+                                    <span class="text-gray-300 font-medium">{{ equipo.nombre }}</span>
+                                    <form method="post" action="{{ path('app_torneo_desinscribir', {'id': torneo.id, 'equipo_id': equipo.id}) }}" onsubmit="return confirm('{{ 'general.delete_confirm'|trans }}');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('desinscribir' ~ equipo.id) }}">
+                                        <button class="text-red-400 hover:text-red-300 text-sm font-medium">{{ 'torneo.show.unregister'|trans }}</button>
+                                    </form>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                 </div>
                 
                 <div class="mt-6 pt-4 border-t border-gray-700">
-                    <a href="{{ path('app_torneo_inscribir', {'id': torneo.id}) }}" class="btn-primario w-full text-sm">
-                        Inscribir Equipo
-                    </a>
+                    {% if torneo.estado.value == 'Inscripciones' %}
+                        <a href="{{ path('app_torneo_inscribir', {'id': torneo.id}) }}" class="btn-primario w-full text-sm text-center block">
+                            {{ 'torneo.show.inscribe'|trans }}
+                        </a>
+                    {% else %}
+                        <button disabled class="bg-gray-600 text-gray-300 w-full text-sm text-center block py-2 px-4 rounded-md cursor-not-allowed opacity-50">
+                            {{ 'torneo.show.inscribe'|trans }}
+                        </button>
+                    {% endif %}
                 </div>
             </div>
         </div>

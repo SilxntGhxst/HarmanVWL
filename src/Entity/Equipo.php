@@ -7,9 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EquipoRepository::class)]
+#[UniqueEntity(fields: ['nombre'], message: 'assert.equipo.name.unique')]
+#[UniqueEntity(fields: ['codigo_tag'], message: 'assert.equipo.tag.unique')]
 class Equipo
 {
     #[ORM\Id]
@@ -17,25 +20,29 @@ class Equipo
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'El equipo debe tener un nombre.')]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank(message: 'assert.equipo.name.not_blank')]
     #[Assert\Length(
         min: 3,
         max: 50,
-        minMessage: 'El nombre del equipo debe tener al menos {{ limit }} caracteres',
-        maxMessage: 'El nombre del equipo no puede tener más de {{ limit }} caracteres',
+        minMessage: 'assert.equipo.name.min',
+        maxMessage: 'assert.equipo.name.max',
     )]
     private ?string $nombre = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank(message: 'assert.equipo.tag.not_blank')]
     #[Assert\Length(
         min: 3,
         max: 8,
-        minMessage: 'El Tag del equipo debe tener al menos {{ limit }} caracteres',
-        maxMessage: 'El Tag del equipo no puede tener más de {{ limit }} caracteres',
+        minMessage: 'assert.equipo.tag.min',
+        maxMessage: 'assert.equipo.tag.max',
     )]
     private ?string $codigo_tag = null;
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotNull(message: 'assert.equipo.date.not_null')]
+    #[Assert\Type("\DateTimeInterface", message: 'assert.equipo.date.invalid')]
+    #[Assert\LessThanOrEqual('today', message: 'assert.equipo.date.future')]
     private ?\DateTime $fecha_creacion = null;
 
     /**

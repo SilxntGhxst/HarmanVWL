@@ -16,12 +16,13 @@ class TorneoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nombre')
-            ->add('juego')
-            ->add('bolsa_premios')
+            ->add('nombre', null, ['label' => 'form.torneo.nombre'])
+            ->add('juego', null, ['label' => 'form.torneo.juego'])
+            ->add('bolsa_premios', null, ['label' => 'form.torneo.bolsa_premios'])
             ->add('estado', EnumType::class, [
                 'class' => EstadoTorneo::class,
-                'placeholder' => 'Selecciona un estado...',
+                'placeholder' => 'form.torneo.estado_placeholder',
+                'label' => 'form.torneo.estado',
                 // Esta pequeña función extrae el texto legible del Backed Enum
                 'choice_label' => function ($choice) {
                     return $choice->value;

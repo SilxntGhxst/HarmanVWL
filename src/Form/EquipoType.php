@@ -14,9 +14,9 @@ class EquipoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nombre')
-            ->add('codigo_tag')
-            ->add('fecha_creacion')
+            ->add('nombre', null, ['label' => 'form.equipo.nombre'])
+            ->add('codigo_tag', null, ['label' => 'form.equipo.codigo_tag'])
+            ->add('fecha_creacion', null, ['label' => 'form.equipo.fecha_creacion'])
         ;
     }
 

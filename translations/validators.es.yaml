@@ -1,0 +1,47 @@
+
+assert:
+    equipo:
+        name:
+            unique: Ya existe un equipo con este nombre.
+            not_blank: El equipo debe tener un nombre.
+            min: El nombre del equipo debe tener al menos {{ limit }} caracteres
+            max: El nombre del equipo no puede tener más de {{ limit }} caracteres
+        tag:
+            unique: Ya existe un equipo con este Tag.
+            not_blank: El Tag del equipo no puede estar vacío.
+            min: El Tag del equipo debe tener al menos {{ limit }} caracteres
+            max: El Tag del equipo no puede tener más de {{ limit }} caracteres
+        date:
+            not_null: La fecha de creación es obligatoria.
+            invalid: La fecha de creación no es válida.
+            future: La fecha de creación no puede estar en el futuro.
+    jugador:
+        email:
+            unique: Este correo electrónico ya está registrado en otro jugador.
+            not_blank: El email es obligatorio.
+            invalid: El formato del correo no es válido.
+        nickname:
+            unique: Este nickname ya está en uso.
+            not_blank: El jugador debe tener un nombre.
+            min: El nickname del jugador debe tener al menos {{ limit }} caracteres
+            max: El nickname del jugador no puede tener más de {{ limit }} caracteres
+        rango:
+            not_null: El rango es obligatorio.
+        edad:
+            not_null: La edad es obligatoria.
+            range: La edad debe estar entre {{ min }} y {{ max }}.
+    torneo:
+        name:
+            unique: Ya existe un torneo con este nombre.
+            not_blank: El torneo debe tener un nombre.
+            min: El nombre del torneo debe tener al menos {{ limit }} caracteres
+            max: El nombre del torneo no puede tener más de {{ limit }} caracteres
+        juego:
+            unique: Ya existe un torneo para este juego.
+            not_blank: Este campo es obligatorio.
+            max: El nombre del juego no puede superar los {{ limit }} caracteres.
+        premio:
+            not_null: La bolsa de premios es obligatoria.
+            positive: El premio debe ser positivo
+        estado:
+            not_null: El estado del torneo es obligatorio.

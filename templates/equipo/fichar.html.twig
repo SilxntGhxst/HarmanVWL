@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Fichar Jugador{% endblock %}
+{% block title %}{{ 'equipo.fichar.title'|trans }}{% endblock %}
 
 {% block body %}
     <div class="mb-6">
-        <a href="{{ path('app_equipo_index') }}" class="text-gray-400 hover:text-green-400 transition-colors text-sm flex items-center gap-2">
-            <span>&larr;</span> Volver a la lista
+        <a href="{{ path('app_equipo_show', {'id': equipo.id}) }}" class="link-back">
+            <span>&larr;</span> {{ 'general.back_to_list'|trans }}
         </a>
     </div>
 
     <div class="card max-w-2xl mx-auto">
         <div class="card-header">
-            <h1 class="text-2xl font-bold text-white">
-                Fichar Agente Libre para: <span class="text-green-500">{{ equipo.nombre }}</span>
+            <h1 class="card-title">
+                {{ 'equipo.fichar.title'|trans }}: <span class="text-green-500">{{ equipo.nombre }}</span>
             </h1>
         </div>
 

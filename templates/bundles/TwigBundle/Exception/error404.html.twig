@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Página no encontrada{% endblock %}
+
+{% block body %}
+    <div class="max-w-2xl mx-auto mt-20 text-center">
+        <h1 class="text-6xl font-bold text-indigo-500 mb-4">404</h1>
+        <h2 class="text-2xl font-semibold text-gray-300 mb-6">¡Oops! El registro no existe o fue eliminado.</h2>
+        <p class="text-gray-500 mb-8">
+            El jugador, equipo o torneo que estás intentando buscar, editar o eliminar ya no se encuentra en nuestra base de datos.
+        </p>
+        <a href="{{ path('app_home') }}" class="bg-indigo-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded shadow-lg transition-colors">
+            Volver al Inicio
+        </a>
+    </div>
+{% endblock %}

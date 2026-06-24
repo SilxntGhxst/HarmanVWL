@@ -5,7 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4caee2b8-4258-439f-8faf-20ddd5e78cf1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/styles/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/styles/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/translation.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/translation.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/EquipoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EquipoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/JugadorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/JugadorController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TorneoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TorneoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Equipo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Equipo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Jugador.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Jugador.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Torneo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Torneo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/EquipoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/EquipoType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/FichajeType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/FichajeType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/InscripcionType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/InscripcionType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/JugadorType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/JugadorType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/TorneoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/TorneoType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/equipo/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/equipo/_delete_form.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/equipo/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/equipo/_form.html.twig" afterDir="false" />
@@ -21,6 +41,7 @@
       <change beforePath="$PROJECT_DIR$/templates/jugador/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/jugador/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/jugador/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/jugador/new.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/jugador/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/jugador/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/_tailwind_styles.html.twig" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/torneo/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torneo/_delete_form.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/torneo/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torneo/_form.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/torneo/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torneo/edit.html.twig" afterDir="false" />
@@ -223,7 +244,8 @@
       <workItem from="1781801039474" duration="7876000" />
       <workItem from="1781878873868" duration="13056000" />
       <workItem from="1782138550729" duration="17697000" />
-      <workItem from="1782224748985" duration="7260000" />
+      <workItem from="1782224748985" duration="11764000" />
+      <workItem from="1782310792309" duration="3685000" />
     </task>
     <servers />
   </component>
@@ -235,7 +257,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Entity/Torneo.php</url>
-          <line>17</line>
+          <line>20</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

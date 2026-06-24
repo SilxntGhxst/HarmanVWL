@@ -1,25 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Equipos{% endblock %}
+{% block title %}{{ 'equipo.index.title'|trans }}{% endblock %}
 
 {% block body %}
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-white tracking-tight">Equipos</h1>
+        <h1 class="page-title">{{ 'equipo.index.title'|trans }}</h1>
         <a href="{{ path('app_equipo_new') }}" class="btn-primario">
-            + Nuevo Equipo
+            {{ 'equipo.index.new_button'|trans }}
         </a>
     </div>
 
     <div class="card">
-        <table id="tablaEquipos" class="min-w-full divide-y divide-gray-700">
+        <table class="datatable min-w-full divide-y divide-gray-700">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Código Tag</th>
-                    <th>Fecha Creación</th>
-                    <th>Torneos</th>
-                    <th class="text-right">Acciones</th>
+                    <th>{{ 'equipo.fields.id'|trans }}</th>
+                    <th>{{ 'equipo.fields.nombre'|trans }}</th>
+                    <th>{{ 'equipo.fields.codigo_tag'|trans }}</th>
+                    <th>{{ 'equipo.fields.fecha_creacion'|trans }}</th>
+                    <th>{{ 'equipo.fields.torneos'|trans }}</th>
+                    <th class="text-right">{{ 'general.actions'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,46 +34,23 @@
                         {% for torneo in equipo.torneos %}
                             <span class="badge">{{ torneo.nombre }}</span>
                         {% else %}
-                            <span class="text-gray-500 text-sm italic">Sin inscribir</span>
+                            <span class="text-gray-500 text-sm italic">{{ 'equipo.index.no_tournaments'|trans }}</span>
                         {% endfor %}
                         </div>
                     </td>
                     <td class="text-right space-x-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
-                        <a href="{{ path('app_equipo_show', {'id': equipo.id}) }}" class="btn-accion">Ver</a>
-                        <a href="{{ path('app_equipo_edit', {'id': equipo.id}) }}" class="btn-accion">Editar</a>
+                        <div class="flex justify-end gap-2">
+                            <a href="{{ path('app_equipo_show', {'id': equipo.id}) }}" class="btn-accion">{{ 'general.view'|trans }}</a>
+                            <a href="{{ path('app_equipo_edit', {'id': equipo.id}) }}" class="btn-accion">{{ 'general.edit'|trans }}</a>
+                            <form method="post" action="{{ path('app_equipo_delete', {'id': equipo.id}) }}" onsubmit="return confirm('{{ 'general.delete_confirm'|trans }}');" class="inline-block">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ equipo.id) }}">
+                                <button class="btn-peligro">{{ 'general.delete'|trans }}</button>
+                            </form>
+                        </div>
                     </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="6" class="text-center text-gray-500 py-8">No se encontraron equipos</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
-
-    {% block javascripts_locales %}
-        <script>
-            document.addEventListener("turbo:load", function() {
-                let tabla = $('#tablaEquipos');
-
-                if (tabla.length) {
-                    if (!$.fn.DataTable.isDataTable(tabla)) {
-                        tabla.DataTable({
-                            language: {
-                                url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
-                            },
-                            columnDefs: [
-                                {
-                                    "targets": [-1],
-                                    "orderable": false
-                                }
-                            ]
-                        });
-                    }
-                }
-            });
-        </script>
-    {% endblock %}
-
 {% endblock %}

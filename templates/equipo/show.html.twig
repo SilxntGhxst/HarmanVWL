@@ -4,8 +4,8 @@
 
 {% block body %}
     <div class="mb-6">
-        <a href="{{ path('app_equipo_index') }}" class="text-gray-400 hover:text-green-400 transition-colors text-sm flex items-center gap-2">
-            <span>&larr;</span> Volver a la lista
+        <a href="{{ path('app_equipo_index') }}" class="link-back">
+            <span>&larr;</span> {{ 'general.back_to_list'|trans }}
         </a>
     </div>
 
@@ -13,28 +13,28 @@
         <div class="card-header">
             <h1 class="text-2xl font-bold text-white">Detalles del Equipo</h1>
             <div class="flex gap-2">
-                <a href="{{ path('app_equipo_edit', {'id': equipo.id}) }}" class="btn-secundario py-1.5 px-4 text-sm">Editar</a>
+                <a href="{{ path('app_equipo_edit', {'id': equipo.id}) }}" class="btn-secundario py-1.5 px-4 text-sm">{{ 'general.edit'|trans }}</a>
                 {{ include('equipo/_delete_form.html.twig') }}
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+        <div class="grid-2col">
             <div class="space-y-4">
                 <div>
-                    <h3 class="text-sm font-medium text-gray-400">ID</h3>
-                    <p class="mt-1 text-lg text-white font-mono">{{ equipo.id }}</p>
+                    <h3 class="label-title">ID</h3>
+                    <p class="label-value-mono">{{ equipo.id }}</p>
                 </div>
                 <div>
-                    <h3 class="text-sm font-medium text-gray-400">Nombre</h3>
-                    <p class="mt-1 text-lg text-white font-semibold">{{ equipo.nombre }}</p>
+                    <h3 class="label-title">{{ 'torneo.fields.nombre'|trans }}</h3>
+                    <p class="label-value">{{ equipo.nombre }}</p>
                 </div>
                 <div>
-                    <h3 class="text-sm font-medium text-gray-400">Código Tag</h3>
-                    <p class="mt-1 text-lg"><span class="bg-gray-700 text-gray-200 px-2 py-1 rounded font-mono text-sm">{{ equipo.codigoTag }}</span></p>
+                    <h3 class="label-title">Código Tag</h3>
+                    <p class="label-value"><span class="bg-gray-700 text-gray-200 px-2 py-1 rounded font-mono text-sm">{{ equipo.codigoTag }}</span></p>
                 </div>
                 <div>
-                    <h3 class="text-sm font-medium text-gray-400">Fecha de Creación</h3>
-                    <p class="mt-1 text-lg text-white">{{ equipo.fechaCreacion ? equipo.fechaCreacion|date('d/m/Y') : '-' }}</p>
+                    <h3 class="label-title">Fecha de Creación</h3>
+                    <p class="label-value">{{ equipo.fechaCreacion ? equipo.fechaCreacion|date('d/m/Y') : '-' }}</p>
                 </div>
             </div>
 
@@ -58,9 +58,31 @@
                     </div>
                 {% endif %}
                 
+                <h3 class="text-md font-bold text-green-400 mt-8 mb-4 border-b border-gray-700 pb-2">{{ 'equipo.show.players'|trans }}</h3>
+                {% if equipo.jugadores is not empty %}
+                    <ul class="space-y-3 mb-4">
+                        {% for jugador in equipo.jugadores %}
+                            <li class="list-item-card">
+                                <div>
+                                    <span class="text-gray-300 font-medium block">{{ jugador.nickname }}</span>
+                                    <span class="text-gray-500 text-xs">{{ jugador.rango.value|trans }}</span>
+                                </div>
+                                <form method="post" action="{{ path('app_equipo_despedir', {'id': equipo.id, 'jugador_id': jugador.id}) }}" onsubmit="return confirm('{{ 'general.delete_confirm'|trans }}');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('despedir' ~ jugador.id) }}">
+                                    <button class="text-red-400 hover:text-red-300 text-sm font-medium">{{ 'equipo.show.fire'|trans }}</button>
+                                </form>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div class="text-gray-500 text-sm italic mb-4">
+                        {{ 'equipo.show.no_players'|trans }}
+                    </div>
+                {% endif %}
+
                 <div class="mt-6 pt-4 border-t border-gray-700">
-                    <a href="{{ path('app_equipo_fichar', {'id': equipo.id}) }}" class="btn-primario w-full text-sm">
-                        Fichar Jugador
+                    <a href="{{ path('app_equipo_fichar', {'id': equipo.id}) }}" class="btn-primario w-full text-sm text-center block">
+                        {{ 'equipo.fichar.title'|trans }}
                     </a>
                 </div>
             </div>

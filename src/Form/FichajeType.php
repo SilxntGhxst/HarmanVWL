@@ -14,7 +14,8 @@ class FichajeType extends AbstractType
         $builder
             ->add('jugador', EntityType::class, [
                 'class' => Jugador::class,
-                'placeholder' => 'Selecciona un Agente Libre...',
+                'placeholder' => 'form.fichaje.jugador_placeholder',
+                'label' => 'form.fichaje.jugador',
                 'choice_label' => 'nombre',
 
                 'query_builder' => function (EntityRepository $er) {

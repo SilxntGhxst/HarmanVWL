@@ -1,0 +1,47 @@
+
+assert:
+    equipo:
+        name:
+            unique: A team with this name already exists.
+            not_blank: The team must have a name.
+            min: The team name must have at least {{ limit }} characters.
+            max: The team name cannot have more than {{ limit }} characters.
+        tag:
+            unique: A team with this Tag already exists.
+            not_blank: The team Tag cannot be empty.
+            min: The team Tag must have at least {{ limit }} characters.
+            max: The team Tag cannot have more than {{ limit }} characters.
+        date:
+            not_null: The creation date is mandatory.
+            invalid: The creation date is invalid.
+            future: The creation date cannot be in the future.
+    jugador:
+        email:
+            unique: This email is already registered to another player.
+            not_blank: The email is mandatory.
+            invalid: The email format is invalid.
+        nickname:
+            unique: This nickname is already in use.
+            not_blank: The player must have a name.
+            min: The player nickname must have at least {{ limit }} characters.
+            max: The player nickname cannot have more than {{ limit }} characters.
+        rango:
+            not_null: The rank is mandatory.
+        edad:
+            not_null: Age is mandatory.
+            range: Age must be between {{ min }} and {{ max }}.
+    torneo:
+        name:
+            unique: A tournament with this name already exists.
+            not_blank: The tournament must have a name.
+            min: The tournament name must have at least {{ limit }} characters.
+            max: The tournament name cannot have more than {{ limit }} characters.
+        juego:
+            unique: A tournament for this game already exists.
+            not_blank: This field is mandatory.
+            max: The game name cannot exceed {{ limit }} characters.
+        premio:
+            not_null: The prize pool is mandatory.
+            positive: The prize must be positive.
+        estado:
+            not_null: The tournament status is mandatory.
